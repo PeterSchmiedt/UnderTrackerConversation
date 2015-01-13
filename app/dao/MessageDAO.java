@@ -12,7 +12,7 @@ public interface MessageDAO {
 
     public void deleteMessage(int id);
 
-    public void getMessageById(int id);
+    public Message getMessageById(int id);
 
     public List<Message> getAll();
 }

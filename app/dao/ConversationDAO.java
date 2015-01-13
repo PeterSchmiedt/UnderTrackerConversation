@@ -12,7 +12,7 @@ public interface ConversationDAO {
 
     public void deleteConversation(int id);
 
-    public void getConversationById(int id);
+    public Conversation getConversationById(int id);
 
     public Set<Conversation> getAll();
 }

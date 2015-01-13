@@ -12,7 +12,7 @@ public interface PersonDAO {
 
     public void deletePerson(int id);
 
-    public void getPersonById(int id);
+    public Person getPersonById(int id);
 
     public Set<Person> getAll();
 }
