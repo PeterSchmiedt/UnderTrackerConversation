@@ -1,0 +1,18 @@
+@(title: String, user: String)(conversationSet: Set[_root_.models.Conversation])
+
+@main(title, user) {
+
+    @if(conversationSet == null) {
+        <h1>Nothing here</h1>
+    } else {
+        @for(con <- conversationSet.iterator()) {
+            <p>@con.getName</p>
+            @for(message <- con.getMessages.iterator()) {
+                <p>@message.getMessage</p>
+                <p>@message.getAuthor.getName</p>
+                <p>@message.getDate.getDayOfYear</p>
+            }
+        }
+    }
+
+}
