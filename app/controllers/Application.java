@@ -1,13 +1,18 @@
 package controllers;
 
+import dao.PersonDAO;
+import dao.impl.PersonDAOImpl;
 import models.Person;
+import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.index;
+import views.html.login;
 
 public class Application extends Controller {
 
-    static final String title = "Conversations";
+    static final String title = "UnderTrackerConversations";
+    private static PersonDAO pdao = new PersonDAOImpl();
 
     public static Result index() {
         /*
@@ -30,10 +35,61 @@ public class Application extends Controller {
 
         p1.save();
         p2.save();
-
         */
 
-        return ok(index.render(title, Person.finder.byId(1).getName(), Person.finder.byId(1).getConversations()));
+        if (session().containsKey("username")) {
+
+            Person person = pdao.findByName(session().get("username"));
+
+            if (person == null) {
+                Person p = new Person(session().get("username"));
+                pdao.addPerson(p);
+                person = pdao.getPersonById(p.getId());
+            }
+
+            return ok(index.render(title, person.getName(), person.getConversations()));
+
+        } else {
+            return ok(index.render(title, "Guest User", null));
+        }
+    }
+
+    public static Result login() {
+        return ok(login.render(title, session("username")));
+    }
+
+    public static Result doLogin() {
+        Form<Login> loginForm = Form.form(Login.class).bindFromRequest(new String[0]);
+        if (loginForm.hasErrors()) {
+            return badRequest(login.render(title, session().get("username")));
+        }
+
+        session().clear();
+        session("username", loginForm.get().getName());
+
+        return redirect(routes.Application.index());
+    }
+
+    public static Result logout() {
+        session().clear();
+        flash("success", "You've been logged out");
+        return redirect(routes.Application.index());
+    }
+
+    public static class Login {
+        public String name;
+
+        public String validate() {
+            return null;
+        }
+
+        public String getName() {
+            return this.name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 
 }

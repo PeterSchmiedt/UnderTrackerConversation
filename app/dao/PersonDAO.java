@@ -15,4 +15,6 @@ public interface PersonDAO {
     public Person getPersonById(int id);
 
     public Set<Person> getAll();
+
+    public Person findByName(String name);
 }

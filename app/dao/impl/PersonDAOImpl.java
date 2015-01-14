@@ -30,4 +30,9 @@ public class PersonDAOImpl implements PersonDAO {
     public Set<Person> getAll() {
         return Person.finder.findSet();
     }
+
+    @Override
+    public Person findByName(String name) {
+        return Person.finder.where().eq("name", name).findUnique();
+    }
 }

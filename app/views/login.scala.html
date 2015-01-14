@@ -1,0 +1,16 @@
+@(title: String)(user: String)
+
+@main(title, user) {
+
+    <div class="container">
+
+    <form class="form-signin" action="@routes.Application.doLogin()" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <div class="form-group">
+            <input class="form-control" type="name" id="name" name="name" placeholder="Name" />
+        </div>
+        <button class="btn btn-primary" type="submit">Sig In</button>
+    </form>
+
+    </div> <!-- /container -->
+}
