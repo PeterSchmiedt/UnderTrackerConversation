@@ -1,18 +1,41 @@
 @(title: String, user: String)(conversationSet: Set[_root_.models.Conversation])
 
     @main(title, user) {
-
+        <div class="container">
         @if(conversationSet == null) {
             <h1>Welcome @user</h1>
         } else {
-            @for(con <- conversationSet.iterator()) {
-                <p>@con.getName</p>
-                @for(message <- con.getMessages.iterator()) {
-                    <p>@message.getMessage</p>
-                    <p>@message.getAuthor.getName</p>
-                    <p>@message.getDate.getDayOfYear</p>
-                }
-            }
-        }
+            <div class="panel panel-default">
+                <div class="panel-heading">Conversations</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Last Message</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @for(con <- conversationSet.iterator()) {
+                        <tr>
+                            <a class="" href="@routes.ConversationController.conversationDetail(con.getId)"><td>@con.getName</td></a>
+                            <td>@if(con.getMessages.size() != 0) {
+                                @con.getMessages.get(con.getMessages.size() - 1).getMessage
+                            } else {
+                                No messages yet.
+                            }
+                            </td>
+                            <td>
+                                <a class="btn btn-danger" type="button" href="@routes.ConversationController.leaveConversation(con.getId)" >
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                        </tr>
 
+                    }
+                    </tbody>
+                </table>
+            </div>
+        }
+        </div> <!-- /container -->
     }
