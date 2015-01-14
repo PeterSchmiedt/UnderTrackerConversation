@@ -20,10 +20,11 @@ public class Message extends Model {
     @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
     private DateTime date;
 
-    public static final Finder<Integer, Message> finder = new Finder<Integer, Message>(Integer.class, Message.class);
-
     @ManyToOne(cascade = CascadeType.ALL)
     private Person author;
+
+    public static final Finder<Integer, Message> finder = new Finder<Integer, Message>(Integer.class, Message.class);
+
 
     public Message(String message, Person author, DateTime date) {
         this.message = message;
