@@ -22,7 +22,6 @@ public class Person extends Model {
 
     public Person(String name) {
         this.name = name;
-        this.conversations = new HashSet<>();
     }
 
     public int getId() {

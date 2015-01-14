@@ -22,7 +22,6 @@ public class Conversation extends Model {
 
     public Conversation(String name) {
         this.name = name;
-        messages = new LinkedList<>();
     }
 
     public int getId() {

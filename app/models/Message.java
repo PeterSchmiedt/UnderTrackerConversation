@@ -6,6 +6,7 @@ import org.joda.time.DateTime;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Message extends Model {
@@ -16,12 +17,16 @@ public class Message extends Model {
 
     private String message;
 
+    //TODO if hibernate version changes you need to recompile
     @Column
     @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
     private DateTime date;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Person author;
+
+    //TODO i need to have a set of persons to which the message wont show (because it has been deleted)
+    private Set<Person> messageDeleted;
 
     public static final Finder<Integer, Message> finder = new Finder<Integer, Message>(Integer.class, Message.class);
 
