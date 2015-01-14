@@ -14,5 +14,5 @@ public interface ConversationService {
 
     public boolean leaveConversation(Conversation conversation, Person person);
 
-    public boolean deleteMessage(Person person, Message message);
+    public boolean deleteMessage(Person person, Conversation conversation, Message message);
 }

@@ -68,4 +68,12 @@ public class Message extends Model {
     public void setAuthor(Person author) {
         this.author = author;
     }
+
+    public Set<Person> getMessageDeleted() {
+        return messageDeleted;
+    }
+
+    public void setMessageDeleted(Set<Person> messageDeleted) {
+        this.messageDeleted = messageDeleted;
+    }
 }
