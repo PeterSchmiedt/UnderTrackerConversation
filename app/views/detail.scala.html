@@ -1,10 +1,65 @@
-@(title: String, user: String)(conversation: _root_.models.Conversation)
+@(title: String, user: String)(conversation: _root_.models.Conversation)(messages: List[_root_.models.Message])(persons: Set[_root_.models.Person])
 
 @main(title, user) {
     <div class="container">
 
 
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
+        <div class="row">
+            <div class="message-wrap col-lg-8 col-lg-offset-2">
+
+                <h3>
+                    @conversation.getName
+                    <small>
+                        (
+                        @for(person <- persons) {
+                            @person.getName,
+                        }
+                        )
+                    </small>
+                </h3>
+
+                <a href="@routes.ConversationController.addUser(conversation.getId)" role="button" class="btn btn-default btn-add-user">Add User</a>
+
+                <hr/>
+
+                <div class="msg-wrap">
+
+                @if(conversation.getMessages == null || conversation.getMessages.size() == 0) {
+                    <div>
+                        <h4>No messages yet.</h4>
+                    </div>
+                } else {
+                    @for(message <- conversation.getMessages()) {
+                        <div class="media msg ">
+                            <div class="media-body">
+                                <small class="pull-right time"><i class="fa fa-clock-o"></i> @message.getDate().getHourOfDay
+                                    : @message.getDate().getMinuteOfHour - @message.getDate().dayOfMonth().get()/@message.getDate().getMonthOfYear()/@message.getDate().getYear</small>
+                                <h5 class="media-heading">@message.getAuthor().getName</h5>
+                                <small class="col-lg-10">
+                                @message.getMessage()
+                                </small>
+                            </div>
+                        </div>
+                    }
+                }
+                </div> <!-- /msg-wrap -->
+
+
+                <form action="@routes.ConversationController.addMessage(conversation.getId)" method="post">
+                    <div class="send-wrap ">
+                        <textarea class="form-control send-message" id="message" name="message" rows="3" placeholder="Write a reply..."></textarea>
+                    </div>
+                    <div class="btn-panel">
+                        <button class=" col-lg-4 text-right btn send-message-btn pull-right" role="button">
+                            <i class="fa fa-plus"></i>
+                            Add Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
 
     </div> <!-- /container -->

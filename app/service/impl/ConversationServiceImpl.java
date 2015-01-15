@@ -76,7 +76,6 @@ public class ConversationServiceImpl implements service.ConversationService {
 
         conversationDB.getMessages().add(message);
 
-        mdao.addMessage(message); //TODO mabye check if message already exists ?
         cdao.updateConversation(conversationDB);
 
         return true;

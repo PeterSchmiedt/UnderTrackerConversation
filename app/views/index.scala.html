@@ -18,9 +18,9 @@
                     <tbody>
                     @for(con <- conversationSet.iterator()) {
                         <tr>
-                            <a class="" href="@routes.ConversationController.conversationDetail(con.getId)"><td>@con.getName</td></a>
+                            <td><a class="" href="@routes.ConversationController.conversationDetail(con.getId)">@con.getName</a></td>
                             <td>@if(con.getMessages.size() != 0) {
-                                @con.getMessages.get(con.getMessages.size() - 1).getMessage
+                                @con.getMessages.get(0).getMessage
                             } else {
                                 No messages yet.
                             }

@@ -1,0 +1,20 @@
+@(title: String)(user: String)(conversation: Conversation, persons: Set[Person])
+
+@main(title, user) {
+
+    <div class="container">
+
+        <form class="form-inline" action="@routes.ConversationController.doAddUser(conversation.getId)" method="post">
+            <h2 class="form-signin-heading">Add Person to @conversation.getName</h2>
+            <div class="form-group">
+                <select name="person" id="person" class="form-control">
+                @for(person <- persons) {
+                    <option value="@person.getId">@person.getName</option>
+                }
+                </select>
+            </div>
+            <button class="btn btn-primary" type="submit">Add</button>
+        </form>
+
+    </div> <!-- /container -->
+}
