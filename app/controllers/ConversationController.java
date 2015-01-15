@@ -26,10 +26,10 @@ import java.util.Set;
 
 public class ConversationController extends Controller {
 
-    static final String title = "UnderTrackerConversations";
-    static PersonDAO pdao = new PersonDAOImpl();
-    static ConversationDAO cdao = new ConversationDAOImpl();
-    static ConversationService conversationService = new ConversationServiceImpl();
+    private static final String title = "UnderTrackerConversations";
+    private static final PersonDAO pdao = new PersonDAOImpl();
+    private static final ConversationDAO cdao = new ConversationDAOImpl();
+    private static final ConversationService conversationService = new ConversationServiceImpl();
 
     public static Result leaveConversation(int id) {
 
@@ -183,10 +183,6 @@ public class ConversationController extends Controller {
     public static class AddPersonForm {
         public int person;
 
-        public String validate() {
-            return null;
-        }
-
         public int getPerson() {
             return person;
         }
@@ -199,10 +195,6 @@ public class ConversationController extends Controller {
     public static class AddMessageForm {
         public String message;
 
-        public String validate() {
-            return null;
-        }
-
         public String getMessage() {
             return message;
         }
@@ -214,10 +206,6 @@ public class ConversationController extends Controller {
 
     public static class ConversationForm {
         public String name;
-
-        public String validate() {
-            return null;
-        }
 
         public String getName() {
             return this.name;

@@ -2,10 +2,7 @@ package controllers;
 
 import dao.PersonDAO;
 import dao.impl.PersonDAOImpl;
-import models.Conversation;
-import models.Message;
 import models.Person;
-import org.joda.time.DateTime;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -14,8 +11,8 @@ import views.html.login;
 
 public class Application extends Controller {
 
-    static final String title = "UnderTrackerConversations";
-    private static PersonDAO pdao = new PersonDAOImpl();
+    private static final String title = "UnderTrackerConversations";
+    private static final PersonDAO pdao = new PersonDAOImpl();
 
     public static Result index() {
         /*
@@ -81,10 +78,6 @@ public class Application extends Controller {
 
     public static class Login {
         public String name;
-
-        public String validate() {
-            return null;
-        }
 
         public String getName() {
             return this.name;

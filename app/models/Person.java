@@ -3,7 +3,6 @@ package models;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -36,8 +35,8 @@ public class Person extends Model {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String newName) {
+        this.name = newName;
     }
 
     public Set<Conversation> getConversations() {

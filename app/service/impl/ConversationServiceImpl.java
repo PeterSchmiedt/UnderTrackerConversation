@@ -13,9 +13,9 @@ import play.Logger;
 
 public class ConversationServiceImpl implements service.ConversationService {
 
-    ConversationDAO cdao;
-    PersonDAO pdao;
-    MessageDAO mdao;
+    private final ConversationDAO cdao;
+    private final PersonDAO pdao;
+    private final MessageDAO mdao;
 
     public ConversationServiceImpl() {
         cdao = new ConversationDAOImpl();

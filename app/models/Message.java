@@ -52,8 +52,8 @@ public class Message extends Model {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessage(String newMessage) {
+        this.message = newMessage;
     }
 
     public DateTime getDate() {

@@ -3,7 +3,6 @@ package models;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
-import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -36,8 +35,8 @@ public class Conversation extends Model {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String newName) {
+        this.name = newName;
     }
 
     public List<Message> getMessages() {

@@ -17,10 +17,10 @@ import service.impl.ConversationServiceImpl;
 
 public class MessageController extends Controller {
 
-    static PersonDAO pdao = new PersonDAOImpl();
-    static MessageDAO mdao = new MessageDAOImpl();
-    static ConversationDAO cdao = new ConversationDAOImpl();
-    static ConversationService conversationService = new ConversationServiceImpl();
+    private static final PersonDAO pdao = new PersonDAOImpl();
+    private static final MessageDAO mdao = new MessageDAOImpl();
+    private static final ConversationDAO cdao = new ConversationDAOImpl();
+    private static final ConversationService conversationService = new ConversationServiceImpl();
 
     public static Result deleteMessage(int id, int messageId) {
         Conversation conversation = cdao.getConversationById(id);
