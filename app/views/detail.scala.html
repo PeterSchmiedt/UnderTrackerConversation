@@ -1,4 +1,4 @@
-@(title: String, user: String)(conversation: _root_.models.Conversation)(messages: List[_root_.models.Message])(persons: Set[_root_.models.Person])
+@(title: String, user: String)(conversation: _root_.models.Conversation)(messages: List[_root_.models.Message])(persons: Set[_root_.models.Person])(currentPerson: Person)
 
 @main(title, user) {
     <div class="container">
@@ -20,7 +20,8 @@
                     </small>
                 </h3>
 
-                <a href="@routes.ConversationController.addUser(conversation.getId)" role="button" class="btn btn-default btn-add-user">Add User</a>
+                <a href="@routes.ConversationController.addUser(conversation.getId)" role="button" class="btn btn-default btn-add-user">
+                    Add User</a>
 
                 <hr/>
 
@@ -32,16 +33,18 @@
                     </div>
                 } else {
                     @for(message <- conversation.getMessages()) {
-                        <div class="media msg ">
-                            <div class="media-body">
-                                <small class="pull-right time"><i class="fa fa-clock-o"></i> @message.getDate().getHourOfDay
-                                    : @message.getDate().getMinuteOfHour - @message.getDate().dayOfMonth().get()/@message.getDate().getMonthOfYear()/@message.getDate().getYear</small>
-                                <h5 class="media-heading">@message.getAuthor().getName</h5>
-                                <small class="col-lg-10">
-                                @message.getMessage()
-                                </small>
+                        @if(!message.getMessageDeleted.contains(currentPerson)) {
+                            <div class="media msg ">
+                                <div class="media-body">
+                                    <small class="pull-right time"><i class="fa fa-clock-o"></i> @message.getDate().getHourOfDay
+                                        : @message.getDate().getMinuteOfHour - @message.getDate().dayOfMonth().get()/@message.getDate().getMonthOfYear()/@message.getDate().getYear  <a href="@routes.MessageController.deleteMessage(conversation.getId, message.getId)" role="button" class="btn btn-default btn-delete-message btn-xs glyphicon glyphicon-remove"></a></small>
+                                    <h5 class="media-heading">@message.getAuthor().getName</h5>
+                                    <small class="col-lg-10">
+                                    @message.getMessage()
+                                    </small>
+                                </div>
                             </div>
-                        </div>
+                        }
                     }
                 }
                 </div> <!-- /msg-wrap -->

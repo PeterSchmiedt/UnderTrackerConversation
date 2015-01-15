@@ -91,9 +91,14 @@ public class ConversationController extends Controller {
             }
         });
 
+        Person currentPerson = pdao.findByName(session().get("username"));
+        if (currentPerson == null) {
+            Logger.debug("ConversationController -> conversationDetail -> Person not found.");
+        }
+
         Set<Person> persons = Person.finder.where().eq("conversations.id", conversation.getId()).findSet();
 
-        return ok(detail.render(title, session().get("username"), conversation, messages, persons));
+        return ok(detail.render(title, session().get("username"), conversation, messages, persons, currentPerson));
     }
 
     public static Result addMessage(int id) {

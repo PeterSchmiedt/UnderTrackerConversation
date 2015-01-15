@@ -25,6 +25,12 @@ create table person (
 ;
 
 
+create table message_person (
+  message_id                     integer not null,
+  person_id                      integer not null,
+  constraint pk_message_person primary key (message_id, person_id))
+;
+
 create table person_conversation (
   person_id                      integer not null,
   conversation_id                integer not null,
@@ -43,6 +49,10 @@ create index ix_message_author_2 on message (author_id);
 
 
 
+alter table message_person add constraint fk_message_person_message_01 foreign key (message_id) references message (id);
+
+alter table message_person add constraint fk_message_person_person_02 foreign key (person_id) references person (id);
+
 alter table person_conversation add constraint fk_person_conversation_person_01 foreign key (person_id) references person (id);
 
 alter table person_conversation add constraint fk_person_conversation_conver_02 foreign key (conversation_id) references conversation (id);
@@ -52,6 +62,8 @@ alter table person_conversation add constraint fk_person_conversation_conver_02 
 drop table if exists conversation cascade;
 
 drop table if exists message cascade;
+
+drop table if exists message_person cascade;
 
 drop table if exists person cascade;
 
