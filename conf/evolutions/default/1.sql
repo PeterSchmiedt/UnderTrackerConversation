@@ -42,32 +42,36 @@ create sequence message_seq;
 
 create sequence person_seq;
 
-alter table message add constraint fk_message_conversation_1 foreign key (conversation_id) references conversation (id);
+alter table message add constraint fk_message_conversation_1 foreign key (conversation_id) references conversation (id) on delete restrict on update restrict;
 create index ix_message_conversation_1 on message (conversation_id);
-alter table message add constraint fk_message_author_2 foreign key (author_id) references person (id);
+alter table message add constraint fk_message_author_2 foreign key (author_id) references person (id) on delete restrict on update restrict;
 create index ix_message_author_2 on message (author_id);
 
 
 
-alter table message_person add constraint fk_message_person_message_01 foreign key (message_id) references message (id);
+alter table message_person add constraint fk_message_person_message_01 foreign key (message_id) references message (id) on delete restrict on update restrict;
 
-alter table message_person add constraint fk_message_person_person_02 foreign key (person_id) references person (id);
+alter table message_person add constraint fk_message_person_person_02 foreign key (person_id) references person (id) on delete restrict on update restrict;
 
-alter table person_conversation add constraint fk_person_conversation_person_01 foreign key (person_id) references person (id);
+alter table person_conversation add constraint fk_person_conversation_person_01 foreign key (person_id) references person (id) on delete restrict on update restrict;
 
-alter table person_conversation add constraint fk_person_conversation_conver_02 foreign key (conversation_id) references conversation (id);
+alter table person_conversation add constraint fk_person_conversation_conver_02 foreign key (conversation_id) references conversation (id) on delete restrict on update restrict;
 
 # --- !Downs
 
-drop table if exists conversation cascade;
+SET REFERENTIAL_INTEGRITY FALSE;
 
-drop table if exists message cascade;
+drop table if exists conversation;
 
-drop table if exists message_person cascade;
+drop table if exists message;
 
-drop table if exists person cascade;
+drop table if exists message_person;
 
-drop table if exists person_conversation cascade;
+drop table if exists person;
+
+drop table if exists person_conversation;
+
+SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists conversation_seq;
 
